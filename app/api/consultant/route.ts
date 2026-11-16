@@ -19,8 +19,8 @@ function isIncomingMessage(value: unknown): value is IncomingMessage {
 }
 
 export async function POST(request: Request) {
-  const contentLength = Number(request.headers.get("content-length") ?? "0");
-  if (Number.isFinite(contentLength) && contentLength > MAX_BODY_BYTES) {
+  const declaredLength = Number(request.headers.get("content-length") ?? "0");
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_BODY_BYTES) {
     return Response.json(
       { error: "REQUEST_TOO_LARGE", message: "This message is too large. Please shorten it and try again." },
       { status: 413, headers: { "Cache-Control": "no-store" } },
@@ -29,7 +29,14 @@ export async function POST(request: Request) {
 
   let payload: unknown;
   try {
-    payload = await request.json();
+    const rawBody = await request.text();
+    if (new TextEncoder().encode(rawBody).byteLength > MAX_BODY_BYTES) {
+      return Response.json(
+        { error: "REQUEST_TOO_LARGE", message: "This message is too large. Please shorten it and try again." },
+        { status: 413, headers: { "Cache-Control": "no-store" } },
+      );
+    }
+    payload = JSON.parse(rawBody);
   } catch {
     return Response.json(
       { error: "INVALID_JSON", message: "The message could not be read. Please try again." },
