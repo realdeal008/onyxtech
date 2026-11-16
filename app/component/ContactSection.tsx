@@ -84,7 +84,7 @@ const ContactInquiryModal = ({
           className="contact-inquiry-form"
           onSubmit={event => {
             event.preventDefault();
-            onClose();
+            // No submission endpoint is configured yet. Keep the visitor's draft in place.
           }}
         >
           <fieldset>
@@ -159,15 +159,22 @@ const ContactInquiryModal = ({
               className="form-textarea"
               name="message"
               required
+              defaultValue={consultantSummary}
             />
           </label>
 
+          <p className="contact-submit-notice" role="status">
+            Inquiry delivery is not configured yet. Your details stay in this form and are not sent or stored.
+          </p>
+
           <div className="submit-container">
             <button
-              type="submit"
+              type="button"
               className="submit-button"
+              disabled
+              aria-disabled="true"
             >
-              <span>Submit</span>
+              <span>Submission unavailable</span>
             </button>
           </div>
         </form>
@@ -182,6 +189,20 @@ export const LandingDashboard = () => {
 
   const [isContactOpen, setIsContactOpen] =
     useState(false);
+  const [consultantSummary, setConsultantSummary] = useState("");
+
+  useEffect(() => {
+    const handleConsultantInquiry = (event: Event) => {
+      const detail = (event as CustomEvent<{ summary?: string }>).detail;
+      if (typeof detail?.summary === "string") {
+        setConsultantSummary(detail.summary.slice(0, 9000));
+        setIsContactOpen(true);
+      }
+    };
+
+    window.addEventListener("onyx:open-inquiry", handleConsultantInquiry);
+    return () => window.removeEventListener("onyx:open-inquiry", handleConsultantInquiry);
+  }, []);
 
   return (
     <main className="landing-dashboard">
