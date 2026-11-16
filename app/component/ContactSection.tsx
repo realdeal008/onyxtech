@@ -12,6 +12,7 @@ interface Lead {
 interface ContactInquiryModalProps {
   isOpen: boolean;
   onClose: () => void;
+  consultantSummary: string;
 }
 
 const mayaLead: Lead = {
@@ -31,7 +32,8 @@ const jordanLead: Lead = {
 
 const ContactInquiryModal = ({
   isOpen,
-  onClose
+  onClose,
+  consultantSummary
 }: ContactInquiryModalProps) => {
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : 'unset';
@@ -409,6 +411,7 @@ export const LandingDashboard = () => {
       <ContactInquiryModal
         isOpen={isContactOpen}
         onClose={() => setIsContactOpen(false)}
+        consultantSummary={consultantSummary}
       />
     </main>
   );
