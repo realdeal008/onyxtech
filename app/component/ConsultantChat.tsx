@@ -247,7 +247,7 @@ export default function ConsultantChat() {
             </div>
             <div className="onyx-chat-heading">
               <h2 id="onyx-chat-title">OnyxTech Consultant</h2>
-              <p>Project discovery · Groq free-tier model</p>
+              <p>Project discovery · Groq integration ready</p>
             </div>
             <button
               type="button"
@@ -261,7 +261,7 @@ export default function ConsultantChat() {
 
           <div className="onyx-chat-notice" role="note">
             <span className="onyx-status-dot" />
-            Messages are sent to Groq when the server is configured. Avoid sharing sensitive or confidential information.
+            Groq connection awaits authorised server setup. Once enabled, messages are sent to Groq. Avoid sharing sensitive or confidential information.
           </div>
 
           <div className="onyx-chat-messages" aria-live="polite" aria-relevant="additions text">
