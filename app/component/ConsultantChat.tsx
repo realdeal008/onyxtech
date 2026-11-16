@@ -175,6 +175,7 @@ export default function ConsultantChat() {
 
       {isOpen && (
         <section
+          id="onyx-consultant-panel"
           className="onyx-chat-panel"
           role="dialog"
           aria-modal="false"
@@ -337,7 +338,7 @@ export default function ConsultantChat() {
         onClick={() => (isOpen ? setIsOpen(false) : openChat())}
         aria-label={isOpen ? "Close OnyxTech consultant" : "Open OnyxTech consultant"}
         aria-expanded={isOpen}
-        aria-controls="onyx-chat-title"
+        aria-controls="onyx-consultant-panel"
       >
         {isOpen ? <X size={22} aria-hidden="true" /> : <MessageCircle size={22} aria-hidden="true" />}
         {!isOpen && <span>Let’s talk</span>}
