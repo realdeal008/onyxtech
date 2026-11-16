@@ -176,7 +176,7 @@ export default function ConsultantChat() {
       while (true) {
         const { value, done } = await reader.read();
         buffer += decoder.decode(value, { stream: !done });
-        const events = buffer.split("\n\n");
+        const events = buffer.split(/\r?\n\r?\n/);
         buffer = events.pop() ?? "";
         for (const eventText of events) processEvent(eventText);
         if (done) break;
@@ -247,7 +247,7 @@ export default function ConsultantChat() {
             </div>
             <div className="onyx-chat-heading">
               <h2 id="onyx-chat-title">OnyxTech Consultant</h2>
-              <p>Project discovery · Powered by Groq</p>
+              <p>Project discovery · Groq free-tier model</p>
             </div>
             <button
               type="button"
@@ -261,7 +261,7 @@ export default function ConsultantChat() {
 
           <div className="onyx-chat-notice" role="note">
             <span className="onyx-status-dot" />
-            AI-assisted project planning. Avoid sharing sensitive or confidential information.
+            Messages are sent to Groq when the server is configured. Avoid sharing sensitive or confidential information.
           </div>
 
           <div className="onyx-chat-messages" aria-live="polite" aria-relevant="additions text">
