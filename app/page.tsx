@@ -9,6 +9,7 @@ import {TechnicalArsenal} from "./component/SkillSection";
 import {LandingDashboard} from "./component/ContactSection";
 import BackgroundAnimation from "./component/BackgroundAnimation";
 import Footer from "./component/Footer";
+import ConsultantChat from "./component/ConsultantChat";
 
 export default function Page() {
   return (
@@ -23,6 +24,7 @@ export default function Page() {
         <LandingDashboard />
       </BackgroundAnimation>
        <Footer/>
+      <ConsultantChat />
     </SplashScreen>
   );
 }
