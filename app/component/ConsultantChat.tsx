@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import {
   ArrowUpRight,
   Bot,
-  Check,
   ChevronDown,
   CircleHelp,
   LoaderCircle,
@@ -100,8 +99,12 @@ export default function ConsultantChat() {
       role: "user",
       content,
     };
+    const assistantId = ++nextId.current;
     const nextMessages = [...messages, userMessage];
-    setMessages(nextMessages);
+    setMessages([
+      ...nextMessages,
+      { id: assistantId, role: "assistant", content: "" },
+    ]);
     setDraft("");
     setError("");
     setIsLoading(true);
@@ -117,18 +120,75 @@ export default function ConsultantChat() {
           })),
         }),
       });
-      const result = (await response.json()) as { message?: string; error?: string };
+
       if (!response.ok) {
+        const result = (await response.json()) as { message?: string };
+        setMessages((current) => current.filter((message) => message.id !== assistantId));
         setError(result.message || "The consultant could not respond. Please try again later.");
         return;
       }
-      if (result.message) {
-        setMessages((current) => [
-          ...current,
-          { id: ++nextId.current, role: "assistant", content: result.message ?? "" },
-        ]);
+
+      if (!response.body) {
+        setMessages((current) => current.filter((message) => message.id !== assistantId));
+        setError("The consultant returned an empty response. Please try again.");
+        return;
+      }
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let buffer = "";
+      let fullText = "";
+
+      const processEvent = (eventText: string) => {
+        const data = eventText
+          .split("\n")
+          .filter((line) => line.startsWith("data:"))
+          .map((line) => line.slice(5).trim())
+          .join("\n");
+        if (!data || data === "[DONE]") return;
+        try {
+          const event = JSON.parse(data) as {
+            choices?: Array<{ delta?: { content?: string | Array<{ text?: string }> } }>;
+            error?: { message?: string };
+          };
+          if (event.error?.message) throw new Error(event.error.message);
+          const delta = event.choices?.[0]?.delta?.content;
+          const chunk = typeof delta === "string"
+            ? delta
+            : Array.isArray(delta)
+              ? delta.map((part) => part.text ?? "").join("")
+              : "";
+          if (chunk) {
+            fullText += chunk;
+            setMessages((current) =>
+              current.map((message) =>
+                message.id === assistantId ? { ...message, content: fullText } : message,
+              ),
+            );
+          }
+        } catch (parseError) {
+          if (parseError instanceof Error && parseError.message !== "Unexpected end of JSON input") {
+            throw parseError;
+          }
+        }
+      };
+
+      while (true) {
+        const { value, done } = await reader.read();
+        buffer += decoder.decode(value, { stream: !done });
+        const events = buffer.split("\n\n");
+        buffer = events.pop() ?? "";
+        for (const eventText of events) processEvent(eventText);
+        if (done) break;
+      }
+      if (buffer.trim()) processEvent(buffer);
+
+      if (!fullText.trim()) {
+        setMessages((current) => current.filter((message) => message.id !== assistantId));
+        setError("The consultant returned an empty response. Please try again.");
       }
     } catch {
+      setMessages((current) => current.filter((message) => message.id !== assistantId));
       setError("We couldn’t reach the consultant service. Please check your connection and try again.");
     } finally {
       setIsLoading(false);
@@ -187,7 +247,7 @@ export default function ConsultantChat() {
             </div>
             <div className="onyx-chat-heading">
               <h2 id="onyx-chat-title">OnyxTech Consultant</h2>
-              <p>Project discovery · AI connection pending</p>
+              <p>Project discovery · Powered by Groq</p>
             </div>
             <button
               type="button"
@@ -201,7 +261,7 @@ export default function ConsultantChat() {
 
           <div className="onyx-chat-notice" role="note">
             <span className="onyx-status-dot" />
-            Preview interface. AI replies are unavailable until OnyxTech connects a provider.
+            AI-assisted project planning. Avoid sharing sensitive or confidential information.
           </div>
 
           <div className="onyx-chat-messages" aria-live="polite" aria-relevant="additions text">
@@ -242,7 +302,7 @@ export default function ConsultantChat() {
             {isLoading && (
               <div className="onyx-chat-loading" role="status">
                 <LoaderCircle size={16} className="onyx-spin" aria-hidden="true" />
-                Checking consultant connection…
+                OnyxTech is thinking…
               </div>
             )}
             {error && (
@@ -327,7 +387,7 @@ export default function ConsultantChat() {
             </button>
           </form>
           <p className="onyx-chat-privacy">
-            This preview keeps messages in this tab only. Chat transcripts and contact details are not saved.
+            Messages are kept in this tab only by this site and sent to Groq to generate replies. Avoid sharing sensitive information. Provider data handling is subject to Groq’s terms.
           </p>
         </section>
       )}
