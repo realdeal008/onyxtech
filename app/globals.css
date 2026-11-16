@@ -3988,3 +3988,128 @@ body, html {
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
+
+
+/* =========================================================
+   ONYXTECH PROJECT CONSULTANT — metallic blue / cyan
+   ========================================================= */
+.onyx-chat-launcher {
+  position: fixed;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  z-index: 180;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .65rem;
+  min-height: 58px;
+  padding: 0 1.25rem;
+  border: 1px solid rgba(125, 211, 252, .48);
+  border-radius: 999px;
+  color: #eafaff;
+  background: linear-gradient(145deg, #123b65 0%, #075b91 48%, #087f9f 100%);
+  box-shadow: 0 12px 34px rgba(0, 17, 43, .46), inset 0 1px 0 rgba(255,255,255,.26), 0 0 22px rgba(34,211,238,.18);
+  font: 600 .9rem var(--font-inter), sans-serif;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.onyx-chat-launcher:hover { transform: translateY(-3px); border-color: #a5f3fc; box-shadow: 0 16px 40px rgba(0, 17, 43, .5), 0 0 30px rgba(34,211,238,.28); }
+.onyx-chat-launcher:focus-visible, .onyx-chat-panel button:focus-visible, .onyx-chat-panel textarea:focus-visible, .onyx-welcome button:focus-visible {
+  outline: 2px solid #a5f3fc;
+  outline-offset: 3px;
+}
+.onyx-launcher-orbit { position: absolute; inset: -5px; border: 1px solid rgba(103,232,249,.18); border-radius: inherit; pointer-events: none; }
+.onyx-welcome {
+  position: fixed;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: calc(max(1.25rem, env(safe-area-inset-bottom)) + 76px);
+  z-index: 179;
+  width: min(370px, calc(100vw - 2rem));
+  padding: 1.25rem;
+  border: 1px solid rgba(103,232,249,.28);
+  border-radius: 20px;
+  color: #dbeafe;
+  background: linear-gradient(150deg, rgba(10,27,49,.98), rgba(5,47,75,.98) 62%, rgba(6,78,99,.98));
+  box-shadow: 0 24px 70px rgba(0,0,0,.48), inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(18px);
+}
+.onyx-welcome-kicker { display: flex; align-items: center; gap: .45rem; color: #67e8f9; font: 700 .67rem var(--font-jetbrains-mono), monospace; letter-spacing: .13em; }
+.onyx-welcome p { margin: .8rem 0 1rem; color: #dbeafe; font-size: .9rem; line-height: 1.65; }
+.onyx-welcome-dismiss { position: absolute; top: .75rem; right: .75rem; display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid rgba(255,255,255,.1); border-radius: 50%; color: #bfdbfe; background: rgba(255,255,255,.06); cursor: pointer; }
+.onyx-welcome-open { display: inline-flex; align-items: center; gap: .45rem; padding: .65rem .9rem; border: 1px solid rgba(103,232,249,.38); border-radius: 999px; color: #ecfeff; background: linear-gradient(120deg, #075985, #0e7490); font-size: .8rem; font-weight: 650; cursor: pointer; }
+.onyx-chat-panel {
+  position: fixed;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: calc(max(1.25rem, env(safe-area-inset-bottom)) + 76px);
+  z-index: 181;
+  display: flex;
+  flex-direction: column;
+  width: min(430px, calc(100vw - 2rem));
+  max-height: min(720px, calc(100dvh - 8rem));
+  min-height: min(520px, calc(100dvh - 8rem));
+  overflow: hidden;
+  border: 1px solid rgba(103,232,249,.25);
+  border-radius: 23px;
+  color: #e2e8f0;
+  background: linear-gradient(160deg, rgba(5,15,31,.99), rgba(8,32,56,.99) 60%, rgba(7,45,61,.99));
+  box-shadow: 0 28px 85px rgba(0,0,0,.58), inset 0 1px 0 rgba(255,255,255,.09), 0 0 35px rgba(6,182,212,.1);
+  backdrop-filter: blur(20px);
+}
+.onyx-chat-header { display: flex; align-items: center; gap: .75rem; padding: 1rem 1.05rem; border-bottom: 1px solid rgba(125,211,252,.12); background: linear-gradient(110deg, rgba(15,54,91,.88), rgba(8,71,94,.7)); }
+.onyx-chat-brandmark { display: grid; place-items: center; width: 42px; height: 42px; flex: 0 0 auto; border: 1px solid rgba(165,243,252,.45); border-radius: 13px; color: #a5f3fc; background: linear-gradient(145deg, #174a78, #087e9e); box-shadow: inset 0 1px 0 rgba(255,255,255,.24), 0 5px 16px rgba(0,0,0,.2); }
+.onyx-chat-heading { min-width: 0; flex: 1; }
+.onyx-chat-heading h2 { margin: 0; color: #f0f9ff; font-size: .92rem; font-weight: 700; letter-spacing: -.015em; }
+.onyx-chat-heading p { margin: .22rem 0 0; color: #8ddded; font-size: .68rem; }
+.onyx-chat-icon-button { display: grid; place-items: center; width: 36px; height: 36px; border: 1px solid rgba(255,255,255,.12); border-radius: 50%; color: #dbeafe; background: rgba(255,255,255,.06); cursor: pointer; }
+.onyx-chat-notice { display: flex; align-items: flex-start; gap: .55rem; padding: .65rem 1rem; border-bottom: 1px solid rgba(125,211,252,.1); color: #b6d9e9; background: rgba(8,47,73,.55); font-size: .68rem; line-height: 1.5; }
+.onyx-status-dot { width: 7px; height: 7px; flex: 0 0 auto; margin-top: .25rem; border-radius: 50%; background: #fbbf24; box-shadow: 0 0 9px rgba(251,191,36,.55); }
+.onyx-chat-messages { flex: 1; min-height: 0; overflow-y: auto; padding: 1rem; scrollbar-width: thin; scrollbar-color: rgba(103,232,249,.3) transparent; }
+.onyx-chat-empty { display: flex; flex-direction: column; align-items: center; padding: .8rem 0 .2rem; text-align: center; }
+.onyx-chat-orb { display: grid; place-items: center; width: 54px; height: 54px; margin-bottom: .8rem; border: 1px solid rgba(103,232,249,.4); border-radius: 18px; color: #a5f3fc; background: radial-gradient(circle at 35% 25%, #1e7494, #102d52 72%); box-shadow: inset 0 1px 0 rgba(255,255,255,.24), 0 0 26px rgba(34,211,238,.13); }
+.onyx-chat-empty h3 { margin: 0; color: #f0f9ff; font-size: 1.05rem; font-weight: 700; }
+.onyx-chat-empty > p { max-width: 300px; margin: .45rem 0 1rem; color: #9fb8ca; font-size: .77rem; line-height: 1.55; }
+.onyx-starter-list { display: grid; width: 100%; gap: .5rem; }
+.onyx-starter-button { display: flex; align-items: center; justify-content: space-between; gap: .7rem; width: 100%; padding: .7rem .8rem; border: 1px solid rgba(125,211,252,.16); border-radius: 12px; color: #cde9f6; background: rgba(15,43,70,.66); text-align: left; font-size: .73rem; line-height: 1.45; cursor: pointer; transition: border-color .2s ease, background .2s ease; }
+.onyx-starter-button:hover { border-color: rgba(103,232,249,.5); background: rgba(8,75,100,.55); }
+.onyx-starter-button:disabled { opacity: .5; cursor: not-allowed; }
+.onyx-message-list { display: flex; flex-direction: column; gap: .85rem; }
+.onyx-message { display: flex; align-items: flex-start; gap: .45rem; max-width: 92%; }
+.onyx-message p { margin: 0; padding: .7rem .85rem; border: 1px solid rgba(125,211,252,.12); border-radius: 4px 14px 14px 14px; color: #d8eaf5; background: rgba(15,42,68,.8); font-size: .8rem; line-height: 1.6; white-space: pre-wrap; overflow-wrap: anywhere; }
+.onyx-message-user { align-self: flex-end; justify-content: flex-end; }
+.onyx-message-user p { border-color: rgba(34,211,238,.28); border-radius: 14px 4px 14px 14px; color: #ecfeff; background: linear-gradient(130deg, rgba(9,75,119,.9), rgba(8,100,119,.86)); }
+.onyx-message-avatar { display: grid; place-items: center; width: 25px; height: 25px; flex: 0 0 auto; border: 1px solid rgba(103,232,249,.25); border-radius: 8px; color: #a5f3fc; background: #123a59; }
+.onyx-chat-loading { display: flex; align-items: center; gap: .5rem; margin-top: .85rem; color: #a5ddeb; font-size: .74rem; }
+.onyx-chat-error { display: flex; align-items: flex-start; gap: .5rem; margin-top: .8rem; padding: .7rem; border: 1px solid rgba(251,191,36,.25); border-radius: 12px; color: #fde68a; background: rgba(120,53,15,.2); font-size: .73rem; line-height: 1.5; }
+.onyx-chat-error p { margin: 0; }
+.onyx-spin { animation: onyxConsultantSpin 1s linear infinite; }
+@keyframes onyxConsultantSpin { to { transform: rotate(360deg); } }
+.onyx-chat-tools { padding: .65rem 1rem; border-top: 1px solid rgba(125,211,252,.1); }
+.onyx-budget-toggle { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: .35rem 0; color: #a5e8f5; background: transparent; font-size: .72rem; font-weight: 650; cursor: pointer; }
+.onyx-budget-toggle svg { transition: transform .2s ease; }
+.onyx-budget-toggle .onyx-chevron-open { transform: rotate(180deg); }
+.onyx-budget-list { display: grid; gap: .45rem; max-height: 190px; overflow-y: auto; padding-top: .55rem; }
+.onyx-budget-disclaimer, .onyx-budget-footnote { margin: 0; color: #94a3b8; font-size: .63rem; line-height: 1.5; }
+.onyx-budget-row { display: flex; justify-content: space-between; gap: .8rem; color: #cbd5e1; font-size: .68rem; }
+.onyx-budget-row strong { color: #a5f3fc; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
+.onyx-chat-handoff { display: grid; gap: .35rem; padding: .55rem 1rem .7rem; border-top: 1px solid rgba(125,211,252,.1); }
+.onyx-chat-handoff button { display: inline-flex; align-items: center; justify-content: center; gap: .45rem; min-height: 36px; border: 1px solid rgba(103,232,249,.3); border-radius: 10px; color: #e0faff; background: linear-gradient(110deg, #075985, #0e7490); font-size: .74rem; font-weight: 650; cursor: pointer; }
+.onyx-chat-handoff span { color: #8faec1; font-size: .61rem; line-height: 1.4; text-align: center; }
+.onyx-chat-composer { display: flex; align-items: flex-end; gap: .6rem; padding: .75rem .85rem; border-top: 1px solid rgba(125,211,252,.14); background: rgba(2,13,28,.7); }
+.onyx-chat-composer textarea { flex: 1; min-height: 42px; max-height: 110px; resize: vertical; padding: .72rem .8rem; border: 1px solid rgba(125,211,252,.18); border-radius: 13px; outline: none; color: #e0f2fe; background: rgba(15,38,62,.8); font: 400 .77rem/1.45 var(--font-inter), sans-serif; }
+.onyx-chat-composer textarea::placeholder { color: #7897ad; }
+.onyx-chat-composer textarea:focus { border-color: rgba(103,232,249,.65); box-shadow: 0 0 0 3px rgba(34,211,238,.08); }
+.onyx-chat-send { display: grid; place-items: center; width: 42px; height: 42px; flex: 0 0 auto; border: 1px solid rgba(165,243,252,.35); border-radius: 13px; color: #ecfeff; background: linear-gradient(145deg, #0e7490, #075985); cursor: pointer; }
+.onyx-chat-send:disabled { opacity: .45; cursor: not-allowed; }
+.onyx-chat-privacy { margin: 0; padding: 0 .9rem .65rem; color: #718da2; background: rgba(2,13,28,.7); font-size: .59rem; line-height: 1.45; text-align: center; }
+.contact-submit-notice { margin: 0; color: #9fb8ca; font-size: .78rem; line-height: 1.5; }
+.contact-inquiry-form .submit-button:disabled { cursor: not-allowed; opacity: .55; filter: saturate(.6); }
+@media (max-width: 640px) {
+  .onyx-chat-launcher { right: max(.85rem, env(safe-area-inset-right)); bottom: max(.85rem, env(safe-area-inset-bottom)); min-height: 54px; padding: 0 1rem; }
+  .onyx-welcome { right: .75rem; bottom: calc(max(.85rem, env(safe-area-inset-bottom)) + 68px); width: calc(100vw - 1.5rem); }
+  .onyx-chat-panel { right: .5rem; bottom: calc(max(.5rem, env(safe-area-inset-bottom)) + 64px); width: calc(100vw - 1rem); max-height: calc(100dvh - 7rem); min-height: min(500px, calc(100dvh - 7rem)); border-radius: 19px; }
+  .onyx-chat-messages { padding: .8rem; }
+  .onyx-chat-header { padding: .85rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .onyx-chat-launcher, .onyx-chat-panel *, .onyx-welcome *, .onyx-spin { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
